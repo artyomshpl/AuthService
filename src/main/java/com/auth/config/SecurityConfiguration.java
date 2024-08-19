@@ -49,8 +49,11 @@ public class SecurityConfiguration {
                 }))
                 // Configure access to endpoints
                 .authorizeHttpRequests(request -> request
-                        //* - 1 level of nesting, ** - any number of nesting levels
+                        // Allow access to Swagger UI and API docs
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+                        // Allow access to sign-up and sign-in endpoints
                         .requestMatchers("/auth/sign-up", "/auth/sign-in").permitAll()
+                        .requestMatchers("/auth/validate-token").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
