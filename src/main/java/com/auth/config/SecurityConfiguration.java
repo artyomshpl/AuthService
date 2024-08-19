@@ -49,7 +49,7 @@ public class SecurityConfiguration {
                 }))
                 // Configure access to endpoints
                 .authorizeHttpRequests(request -> request
-                        // You can specify a specific path, * - 1 level of nesting, ** - any number of nesting levels
+                        //* - 1 level of nesting, ** - any number of nesting levels
                         .requestMatchers("/auth/sign-up", "/auth/sign-in").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
