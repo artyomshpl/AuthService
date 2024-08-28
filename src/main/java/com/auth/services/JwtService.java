@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import com.auth.entities.User;
+
 @Service
 public class JwtService {
     @Value("${token.signing.key}")
@@ -38,7 +40,7 @@ public class JwtService {
      */
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        if (userDetails instanceof com.auth.entities.User customUserDetails) {
+        if (userDetails instanceof User customUserDetails) {
             claims.put("id", customUserDetails.getId());
             claims.put("username", customUserDetails.getUsername());
             claims.put("role", customUserDetails.getRole());

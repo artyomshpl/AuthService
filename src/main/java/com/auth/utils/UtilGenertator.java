@@ -11,7 +11,7 @@ public class UtilGenertator {
         byte[] secretKeyBytes = Keys.secretKeyFor(SignatureAlgorithm.HS256).getEncoded();
         String secretKey = Base64.getEncoder().encodeToString(secretKeyBytes);
 
-// Print the secret key
+        // Print the secret key
         System.out.println("Secret key: " + secretKey);
     }
 }
