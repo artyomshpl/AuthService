@@ -41,9 +41,9 @@ public class UserService implements UserDetailsService {
         );
     }
 
-    public User getCurrentUser() {
+    public Optional<User> getCurrentUser() {
         var username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return (User) loadUserByUsername(username);
+        return userRepository.findByUsername(username);
     }
 
     public UserDetailsService userDetailsService() {
