@@ -49,10 +49,13 @@ public class UserService implements UserDetailsService {
     }
 
     public void save(User user) {
-        user.setPassword(user.getPassword());
-        user.setRole(user.getRole());
-        user.setUsername(user.getUsername());
-        userRepository.save(user);
+        try {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setRole(user.getRole());
+            user.setUsername(user.getUsername());
+            userRepository.save(user);
+        } catch (Exception e) {
+            throw new RuntimeException("Error saving user", e);
+        }
     }
-
 }

@@ -7,6 +7,7 @@ import com.auth.entities.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,36 +19,34 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
-    /**
-     * Регистрация пользователя
-     *
-     * @param request данные пользователя
-     * @return токен
-     */
     public JwtAuthenticationResponse signUp(SignUpRequest request) {
-        User user = new User(request.getUsername(), passwordEncoder.encode(request.getPassword()), request.getRole());
-        userService.save(user);
-        var jwt = jwtService.generateToken(user);
-        return new JwtAuthenticationResponse(jwt);
+        try {
+            User user = new User(request.getUsername(), passwordEncoder.encode(request.getPassword()), request.getRole());
+            userService.save(user);
+            var jwt = jwtService.generateToken(user);
+            return new JwtAuthenticationResponse(jwt);
+        } catch (Exception e) {
+            throw new RuntimeException("Error during sign up", e);
+        }
     }
 
-    /**
-     * Аутентификация пользователя
-     *
-     * @param request данные пользователя
-     * @return токен
-     */
     public JwtAuthenticationResponse signIn(SignInRequest request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                request.getUsername(),
-                request.getPassword()
-        ));
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    request.getUsername(),
+                    request.getPassword()
+            ));
 
-        var user = userService
-                .userDetailsService()
-                .loadUserByUsername(request.getUsername());
+            var user = userService
+                    .userDetailsService()
+                    .loadUserByUsername(request.getUsername());
 
-        var jwt = jwtService.generateToken(user);
-        return new JwtAuthenticationResponse(jwt);
+            var jwt = jwtService.generateToken(user);
+            return new JwtAuthenticationResponse(jwt);
+        } catch (UsernameNotFoundException e) {
+            throw new UsernameNotFoundException("User not found");
+        } catch (Exception e) {
+            throw new RuntimeException("Error during sign in", e);
+        }
     }
 }

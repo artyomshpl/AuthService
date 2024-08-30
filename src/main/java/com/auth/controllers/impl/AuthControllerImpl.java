@@ -21,22 +21,34 @@ public class AuthControllerImpl implements AuthControllerDocs {
 
     @Override
     public JwtAuthenticationResponse signUp(@RequestBody @Valid SignUpRequest request) {
-        return authenticationService.signUp(request);
+        try {
+            return authenticationService.signUp(request);
+        } catch (Exception e) {
+            throw new RuntimeException("Error during sign up", e);
+        }
     }
 
     @Override
     public JwtAuthenticationResponse signIn(@RequestBody @Valid SignInRequest request) {
-        return authenticationService.signIn(request);
+        try {
+            return authenticationService.signIn(request);
+        } catch (Exception e) {
+            throw new RuntimeException("Error during sign in", e);
+        }
     }
 
     @Override
     public ResponseEntity<String> validateToken(@RequestHeader("Authorization") String token) {
-        if (token != null && token.startsWith("Bearer ")) {
-            String jwt = token.substring(7);
-            if (jwtService.isTokenValidOnlyJwt(jwt)) {
-                return ResponseEntity.ok("OK");
+        try {
+            if (token != null && token.startsWith("Bearer ")) {
+                String jwt = token.substring(7);
+                if (jwtService.isTokenValidOnlyJwt(jwt)) {
+                    return ResponseEntity.ok("OK");
+                }
             }
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error validating token");
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
     }
 }
