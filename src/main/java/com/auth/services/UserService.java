@@ -27,6 +27,7 @@ public class UserService implements UserDetailsService {
         if (user.isEmpty()) {
             throw new UsernameNotFoundException("User not found");
         }
+        System.out.println("Loaded user: {}, password: {} " + user.get().getUsername() + " " + user.get().getPassword() + " " + user.get().getRole());
         String role = user.get().getRole();
         return new org.springframework.security.core.userdetails.User(
                 user.get().getUsername(),
@@ -50,7 +51,7 @@ public class UserService implements UserDetailsService {
 
     public void save(User user) {
         try {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setPassword(user.getPassword());
             user.setRole(user.getRole());
             user.setUsername(user.getUsername());
             userRepository.save(user);
