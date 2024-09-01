@@ -11,8 +11,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.BadCredentialsException;
 
 @Service
@@ -22,7 +20,6 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
-    private static final Logger logger = LoggerFactory.getLogger(AuthenticationService.class);
 
     public JwtAuthenticationResponse signUp(SignUpRequest request) {
         try {
@@ -37,12 +34,10 @@ public class AuthenticationService {
 
     public JwtAuthenticationResponse signIn(SignInRequest request) {
         try {
-            logger.info("Attempting to authenticate user: {}", request.getUsername(), request.getPassword());
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     request.getUsername(),
                     request.getPassword()
             ));
-            logger.info("User authenticated successfully: {}", request.getUsername());
 
             var user = userService
                     .userDetailsService()
@@ -50,13 +45,10 @@ public class AuthenticationService {
             var jwt = jwtService.generateToken(user);
             return new JwtAuthenticationResponse(jwt);
         } catch (UsernameNotFoundException e) {
-            logger.error("User not found: {}", request.getUsername(), e);
             throw new UsernameNotFoundException("User not found");
         } catch (BadCredentialsException e) {
-            logger.error("Invalid credentials for user: {}", request.getUsername(), e);
             throw new BadCredentialsException("Invalid credentials");
         } catch (Exception e) {
-            logger.error("Error during sign in for user: {}", request.getUsername(), e);
             throw new RuntimeException("Error during sign in", e);
         }
     }

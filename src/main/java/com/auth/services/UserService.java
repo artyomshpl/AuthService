@@ -27,7 +27,6 @@ public class UserService implements UserDetailsService {
         if (user.isEmpty()) {
             throw new UsernameNotFoundException("User not found");
         }
-        System.out.println("Loaded user: {}, password: {} " + user.get().getUsername() + " " + user.get().getPassword() + " " + user.get().getRole());
         String role = user.get().getRole();
         return new org.springframework.security.core.userdetails.User(
                 user.get().getUsername(),
