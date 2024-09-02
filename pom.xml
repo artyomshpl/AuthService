@@ -21,6 +21,7 @@
     <springdoc-openapi.version>2.0.2</springdoc-openapi.version>
     <nimbus-jose-jwt.version>9.22</nimbus-jose-jwt.version>
     <jakarta-validation-api.version>3.0.2</jakarta-validation-api.version>
+    <spring-security-test.version>6.3.1</spring-security-test.version>
   </properties>
   <dependencies>
     <dependency>
@@ -104,6 +105,12 @@
       <groupId>jakarta.validation</groupId>
       <artifactId>jakarta.validation-api</artifactId>
       <version>${jakarta-validation-api.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
+      <version>${spring-security-test.version}</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
   <build>
