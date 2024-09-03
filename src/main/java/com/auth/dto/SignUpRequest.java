@@ -2,9 +2,13 @@ package com.auth.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class SignUpRequest {
 
     @Size(min = 5, max = 50, message = "Имя пользователя должно содержать от 5 до 50 символов")

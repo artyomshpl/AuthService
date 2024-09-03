@@ -1,10 +1,8 @@
-package com.auth.controllers;
+package com.auth.controllers.interfaces;
 
 import com.auth.dto.JwtAuthenticationResponse;
 import com.auth.dto.SignInRequest;
 import com.auth.dto.SignUpRequest;
-import com.auth.services.AuthenticationService;
-import com.auth.services.JwtService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -12,17 +10,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/auth")
-@RequiredArgsConstructor
-public class AuthController {
-    private final AuthenticationService authenticationService;
-    private final JwtService jwtService;
+public interface AuthControllerDocs {
 
     @Operation(summary = "Sign up a new user")
     @ApiResponses(value = {
@@ -32,9 +23,7 @@ public class AuthController {
             @ApiResponse(responseCode = "400", description = "Invalid input", content = @Content)
     })
     @PostMapping("/sign-up")
-    public JwtAuthenticationResponse signUp(@RequestBody @Valid SignUpRequest request) {
-        return authenticationService.signUp(request);
-    }
+    JwtAuthenticationResponse signUp(@RequestBody @Valid SignUpRequest request);
 
     @Operation(summary = "Sign in a user")
     @ApiResponses(value = {
@@ -44,9 +33,7 @@ public class AuthController {
             @ApiResponse(responseCode = "400", description = "Invalid input", content = @Content)
     })
     @PostMapping("/sign-in")
-    public JwtAuthenticationResponse signIn(@RequestBody @Valid SignInRequest request) {
-        return authenticationService.signIn(request);
-    }
+    JwtAuthenticationResponse signIn(@RequestBody @Valid SignInRequest request);
 
     @Operation(summary = "Validate a JWT token")
     @ApiResponses(value = {
@@ -55,13 +42,5 @@ public class AuthController {
     })
     @SecurityRequirement(name = "bearerAuth")
     @PostMapping("/validate-token")
-    public ResponseEntity<String> validateToken(@RequestHeader("Authorization") String token) {
-        if (token != null && token.startsWith("Bearer ")) {
-            String jwt = token.substring(7);
-            if (jwtService.isTokenValidOnlyJwt(jwt)) {
-                return ResponseEntity.ok("OK");
-            }
-        }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
-    }
+    ResponseEntity<String> validateToken(@RequestHeader("Authorization") String token);
 }

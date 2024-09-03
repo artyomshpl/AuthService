@@ -14,6 +14,14 @@
   <description>Demo project for Spring Boot</description>
   <properties>
     <java.version>17</java.version>
+    <spring-security-oauth2-authorization-server.version>1.2.5</spring-security-oauth2-authorization-server.version>
+    <spring-security-oauth2-resource-server.version>6.1.0</spring-security-oauth2-resource-server.version>
+    <jjwt.version>0.11.5</jjwt.version>
+    <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
+    <springdoc-openapi.version>2.0.2</springdoc-openapi.version>
+    <nimbus-jose-jwt.version>9.22</nimbus-jose-jwt.version>
+    <jakarta-validation-api.version>3.0.2</jakarta-validation-api.version>
+    <spring-security-test.version>6.3.1</spring-security-test.version>
   </properties>
   <dependencies>
     <dependency>
@@ -42,40 +50,38 @@
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-oauth2-authorization-server</artifactId>
-      <version>1.2.5</version>
+      <version>${spring-security-oauth2-authorization-server.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-oauth2-resource-server</artifactId>
-      <version>6.1.0</version>
+      <version>${spring-security-oauth2-resource-server.version}</version>
     </dependency>
     <dependency>
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt-api</artifactId>
-      <version>0.11.5</version>
+      <version>${jjwt.version}</version>
     </dependency>
     <dependency>
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt-impl</artifactId>
-      <version>0.11.5</version>
+      <version>${jjwt.version}</version>
     </dependency>
     <dependency>
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt-jackson</artifactId>
-      <version>0.11.5</version>
+      <version>${jjwt.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-jwt</artifactId>
-      <version>1.1.1.RELEASE</version>
+      <version>${spring-security-jwt.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-      <version>2.0.2</version>
+      <version>${springdoc-openapi.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-oauth2-jose</artifactId>
@@ -88,7 +94,7 @@
     <dependency>
       <groupId>com.nimbusds</groupId>
       <artifactId>nimbus-jose-jwt</artifactId>
-      <version>9.22</version>
+      <version>${nimbus-jose-jwt.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -98,7 +104,13 @@
     <dependency>
       <groupId>jakarta.validation</groupId>
       <artifactId>jakarta.validation-api</artifactId>
-      <version>3.0.2</version>
+      <version>${jakarta-validation-api.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
+      <version>${spring-security-test.version}</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
   <build>

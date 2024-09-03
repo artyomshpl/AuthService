@@ -2,7 +2,7 @@ package com.auth.services;
 
 import com.auth.entities.User;
 import com.auth.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,17 +15,11 @@ import java.util.Collections;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
     private final PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public UserService(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
-
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -41,9 +35,9 @@ public class UserService implements UserDetailsService {
         );
     }
 
-    public User getCurrentUser() {
+    public Optional<User> getCurrentUser() {
         var username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return (User) loadUserByUsername(username);
+        return userRepository.findByUsername(username);
     }
 
     public UserDetailsService userDetailsService() {
@@ -55,10 +49,13 @@ public class UserService implements UserDetailsService {
     }
 
     public void save(User user) {
-        user.setPassword(user.getPassword());
-        user.setRole(user.getRole());
-        user.setUsername(user.getUsername());
-        userRepository.save(user);
+        try {
+            user.setPassword(user.getPassword());
+            user.setRole(user.getRole());
+            user.setUsername(user.getUsername());
+            userRepository.save(user);
+        } catch (Exception e) {
+            throw new RuntimeException("Error saving user", e);
+        }
     }
-
 }
