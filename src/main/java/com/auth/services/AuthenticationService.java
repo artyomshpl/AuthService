@@ -1,9 +1,9 @@
 package com.auth.services;
 
-import com.auth.dto.JwtAuthenticationResponse;
-import com.auth.dto.SignInRequest;
-import com.auth.dto.SignUpRequest;
-import com.auth.entities.User;
+import com.auth.dataTransferObjects.JwtAuthenticationResponse;
+import com.auth.dataTransferObjects.SignInRequest;
+import com.auth.dataTransferObjects.SignUpRequest;
+import com.auth.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

@@ -1,6 +1,6 @@
 package com.auth.services;
 
-import com.auth.entities.User;
+import com.auth.entity.User;
 import com.auth.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

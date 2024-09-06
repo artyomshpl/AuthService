@@ -1,9 +1,9 @@
 package com.auth.services;
 
-import com.auth.dto.JwtAuthenticationResponse;
-import com.auth.dto.SignInRequest;
-import com.auth.dto.SignUpRequest;
-import com.auth.entities.User;
+import com.auth.dataTransferObjects.JwtAuthenticationResponse;
+import com.auth.dataTransferObjects.SignInRequest;
+import com.auth.dataTransferObjects.SignUpRequest;
+import com.auth.entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

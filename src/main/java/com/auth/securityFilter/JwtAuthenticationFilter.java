@@ -1,4 +1,4 @@
-package com.auth.security;
+package com.auth.securityFilter;
 
 import com.auth.services.JwtService;
 import com.auth.services.UserService;

@@ -1,6 +1,6 @@
-package com.auth.config;
+package com.auth.configuration;
 
-import com.auth.security.JwtAuthenticationFilter;
+import com.auth.securityFilter.JwtAuthenticationFilter;
 import com.auth.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
