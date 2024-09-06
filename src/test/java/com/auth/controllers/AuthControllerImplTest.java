@@ -1,9 +1,9 @@
 package com.auth.controllers;
 
 import com.auth.controllers.impl.AuthControllerImpl;
-import com.auth.dto.JwtAuthenticationResponse;
-import com.auth.dto.SignInRequest;
-import com.auth.dto.SignUpRequest;
+import com.auth.dataTransferObjects.JwtAuthenticationResponse;
+import com.auth.dataTransferObjects.SignInRequest;
+import com.auth.dataTransferObjects.SignUpRequest;
 import com.auth.services.AuthenticationService;
 import com.auth.services.JwtService;
 import com.fasterxml.jackson.databind.ObjectMapper;

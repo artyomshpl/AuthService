@@ -1,4 +1,4 @@
-package com.auth.dto;
+package com.auth.dataTransferObjects;
 
 import lombok.*;
 

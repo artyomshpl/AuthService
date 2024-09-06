@@ -1,9 +1,9 @@
 package com.auth.controllers.impl;
 
 import com.auth.controllers.interfaces.AuthControllerDocs;
-import com.auth.dto.JwtAuthenticationResponse;
-import com.auth.dto.SignInRequest;
-import com.auth.dto.SignUpRequest;
+import com.auth.dataTransferObjects.JwtAuthenticationResponse;
+import com.auth.dataTransferObjects.SignInRequest;
+import com.auth.dataTransferObjects.SignUpRequest;
 import com.auth.services.AuthenticationService;
 import com.auth.services.JwtService;
 import jakarta.validation.Valid;

@@ -1,4 +1,4 @@
-package com.auth.entities;
+package com.auth.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

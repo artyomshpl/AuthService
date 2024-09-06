@@ -1,4 +1,4 @@
-package com.auth.config;
+package com.auth.configuration;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

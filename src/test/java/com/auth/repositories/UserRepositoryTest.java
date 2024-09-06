@@ -1,6 +1,6 @@
 package com.auth.repositories;
 
-import com.auth.entities.User;
+import com.auth.entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

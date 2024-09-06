@@ -1,6 +1,6 @@
 package com.auth.services;
 
-import com.auth.entities.User;
+import com.auth.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;

@@ -1,6 +1,6 @@
 package com.auth.services;
 
-import com.auth.entities.User;
+import com.auth.entity.User;
 import com.auth.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,6 +28,11 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
         }
         String role = user.get().getRole();
+        /*
+            Using full path to clarify that spring security is used here.
+            Both: (User as entity) and (User as spring security object)
+            are used in this class
+         */
         return new org.springframework.security.core.userdetails.User(
                 user.get().getUsername(),
                 user.get().getPassword(),
